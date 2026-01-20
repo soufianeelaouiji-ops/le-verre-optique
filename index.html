@@ -1,0 +1,673 @@
+index.html
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Le Verre Optique</title>
+  <meta name="description" content="Le Verre Optique à Berrechid : lunettes, verres, lentilles, examen de la vue, optométriste sur place. Adresse: 8 Rue Bilal, Hay Ezzahra, Berrechid." />
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#0f1a2f;
+      --muted:#9bb0d0;
+      --text:#eaf0ff;
+      --brand:#4fd1c5;
+      --brand2:#60a5fa;
+      --border: rgba(255,255,255,.10);
+      --shadow: 0 18px 50px rgba(0,0,0,.45);
+      --radius: 18px;
+      --max: 1100px;
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+      color:var(--text);
+      background: radial-gradient(1000px 600px at 20% 0%, rgba(96,165,250,.25), transparent 60%),
+                  radial-gradient(900px 600px at 80% 10%, rgba(79,209,197,.18), transparent 60%),
+                  var(--bg);
+      line-height:1.6;
+    }
+    a{ color:inherit; }
+    .wrap{ max-width:var(--max); margin:0 auto; padding:0 18px; }
+    header{
+      position:sticky; top:0; z-index:50;
+      background: rgba(11,18,32,.75);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 0;
+      gap:12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      text-decoration:none;
+    }
+    .logo{
+      width:38px; height:38px; border-radius:12px;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      display:grid; place-items:center;
+      box-shadow: 0 10px 25px rgba(79,209,197,.18);
+      font-weight:800;
+    }
+    .brand h1{ margin:0; font-size:16px; letter-spacing:.3px; }
+    .muted{ color:var(--muted); font-size:13px; }
+    nav{
+      display:flex; gap:14px; align-items:center; flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    nav a{
+      text-decoration:none; font-size:14px; color:var(--muted);
+      padding:8px 10px; border-radius:12px;
+      border:1px solid transparent;
+    }
+    nav a:hover{ color:var(--text); border-color: var(--border); background: rgba(255,255,255,.03); }
+
+    .btn{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.03);
+      color:var(--text);
+      padding:10px 14px;
+      border-radius: 14px;
+      text-decoration:none;
+      font-weight:600;
+      font-size:14px;
+      display:inline-flex; align-items:center; gap:10px;
+      cursor:pointer;
+    }
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(79,209,197,.9), rgba(96,165,250,.9));
+      border-color: transparent;
+      color:#071020;
+      box-shadow: 0 18px 40px rgba(96,165,250,.18);
+    }
+    .btn.small{ padding:8px 10px; font-size:13px; border-radius:12px; }
+    .lang{
+      display:flex; gap:8px; align-items:center;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.03);
+      padding:6px;
+      border-radius: 14px;
+    }
+    .lang button{
+      border:0; background:transparent; color:var(--muted);
+      padding:8px 10px; border-radius:12px; cursor:pointer;
+      font-weight:700; font-size:13px;
+    }
+    .lang button.active{
+      color:#071020;
+      background: linear-gradient(135deg, rgba(79,209,197,.95), rgba(96,165,250,.95));
+    }
+
+    .hero{
+      padding:48px 0 20px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:18px;
+    }
+    @media (max-width: 900px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      background: rgba(15,26,47,.65);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:18px;
+    }
+    .hero h2{
+      margin:0 0 10px;
+      font-size:34px;
+      line-height:1.15;
+      letter-spacing:.2px;
+    }
+    .hero p{ margin:0 0 16px; color:var(--muted); font-size:16px; }
+    .pillrow{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
+    .pill{
+      border:1px solid var(--border);
+      padding:8px 10px;
+      border-radius: 999px;
+      font-size:13px;
+      color: var(--muted);
+      background: rgba(255,255,255,.03);
+    }
+    .section{ padding:18px 0; }
+    .section h3{
+      margin:0 0 12px;
+      font-size:22px;
+      letter-spacing:.2px;
+    }
+    .cols{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+    }
+    @media (max-width: 900px){
+      .cols{ grid-template-columns: 1fr; }
+    }
+    ul{ margin:0; padding-left:18px; color:var(--muted); }
+    li{ margin:8px 0; }
+
+    .formgrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    @media (max-width: 700px){
+      .formgrid{ grid-template-columns:1fr; }
+    }
+    label{ display:block; font-size:13px; color:var(--muted); margin:10px 0 6px; }
+    input, select, textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius: 14px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+      outline: none;
+    }
+    textarea{ min-height: 110px; resize: vertical; }
+    .hint{ font-size:12px; color:var(--muted); margin-top:8px; }
+
+    .footer{
+      padding:26px 0 90px;
+      color:var(--muted);
+      font-size:13px;
+      border-top:1px solid var(--border);
+      margin-top:18px;
+    }
+
+    /* Floating buttons */
+    .floatbar{
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      display:flex;
+      flex-direction: column;
+      gap:10px;
+      z-index: 60;
+    }
+    .floatbar a{
+      box-shadow: 0 18px 40px rgba(0,0,0,.35);
+    }
+
+    /* Arabic direction tweaks */
+    html[dir="rtl"] body{ font-family: "Noto Naskh Arabic", "Noto Sans Arabic", system-ui, Arial, sans-serif; }
+    html[dir="rtl"] ul{ padding-left:0; padding-right:18px; }
+    html[dir="rtl"] nav{ justify-content:flex-start; }
+
+    /* Language visibility */
+    [data-lang]{ display:none; }
+    [data-lang].show{ display:block; }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="wrap">
+      <div class="topbar">
+        <a class="brand" href="#top">
+          <div class="logo">VO</div>
+          <div>
+            <h1>Le Verre Optique</h1>
+            <div class="muted" data-lang="fr">Berrechid • Opticien</div>
+            <div class="muted" data-lang="ar">برشيد • بصريات</div>
+          </div>
+        </a>
+
+        <nav>
+          <a href="#services" data-lang="fr">Services</a>
+          <a href="#services" data-lang="ar">الخدمات</a>
+
+          <a href="#produits" data-lang="fr">Produits</a>
+          <a href="#produits" data-lang="ar">المنتجات</a>
+
+          <a href="#promo" data-lang="fr">Promo</a>
+          <a href="#promo" data-lang="ar">العروض</a>
+
+          <a href="#rdv" data-lang="fr">Rendez-vous</a>
+          <a href="#rdv" data-lang="ar">حجز موعد</a>
+
+          <a href="#contact" data-lang="fr">Contact</a>
+          <a href="#contact" data-lang="ar">تواصل</a>
+
+          <div class="lang" title="Language">
+            <button id="btnFr" class="active" type="button">FR</button>
+            <button id="btnAr" type="button">AR</button>
+          </div>
+
+          <a class="btn primary" href="#rdv" data-lang="fr">Prendre RDV</a>
+          <a class="btn primary" href="#rdv" data-lang="ar">طلب موعد</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap">
+        <div class="grid">
+          <div class="card">
+            <h2 data-lang="fr">Votre opticien à Berrechid</h2>
+            <h2 data-lang="ar">محل النظارات ديالك فبرشيد</h2>
+
+            <p data-lang="fr">
+              Lunettes, verres correcteurs, lentilles et examen de la vue.
+              <strong>Optométriste sur place</strong>.
+            </p>
+            <p data-lang="ar">
+              نظارات، عدسات طبية، عدسات لاصقة وفحص النظر.
+              <strong>كاين(ة) Optométriste فالمحل</strong>.
+            </p>
+
+            <div class="pillrow">
+              <div class="pill" data-lang="fr">⏰ 10h–13h / 15h–20h</div>
+              <div class="pill" data-lang="ar">⏰ 10:00–13:00 / 15:00–20:00</div>
+
+              <div class="pill" data-lang="fr">📍 8 Rue Bilal, Hay Ezzahra</div>
+              <div class="pill" data-lang="ar">📍 8 زنقة بلال، حي الزهراء</div>
+
+              <div class="pill" data-lang="fr">💬 WhatsApp: 0662100656</div>
+              <div class="pill" data-lang="ar">💬 واتساب: 0662100656</div>
+            </div>
+
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:16px;">
+              <a class="btn primary" id="ctaWhatsappTop" target="_blank" rel="noopener" href="#">
+                <span>WhatsApp</span> <span>↗</span>
+              </a>
+              <a class="btn" href="tel:+212662100656" data-lang="fr">Appeler</a>
+              <a class="btn" href="tel:+212662100656" data-lang="ar">اتصال</a>
+              <a class="btn" id="ctaMapsTop" target="_blank" rel="noopener" href="#">
+                <span data-lang="fr">Google Maps</span>
+                <span data-lang="ar">خرائط Google</span>
+                <span>↗</span>
+              </a>
+            </div>
+
+            <div class="hint" data-lang="fr">
+              Vous pouvez demander un rappel pour fixer un rendez-vous (formulaire en bas).
+            </div>
+            <div class="hint" data-lang="ar">
+              تقدر تعمّر الفورم لتحت باش نتاصلو بك ونحددو الموعد.
+            </div>
+          </div>
+
+          <div class="card">
+            <div data-lang="fr">
+              <h3 style="margin-top:0;">Infos rapides</h3>
+              <ul>
+                <li>Examen de la vue (sur rendez-vous)</li>
+                <li>Verres unifocaux & progressifs</li>
+                <li>Traitements: anti-reflet, blue cut, photochromiques…</li>
+                <li>Réparation, ajustage & entretien</li>
+              </ul>
+            </div>
+
+            <div data-lang="ar">
+              <h3 style="margin-top:0;">معلومات سريعة</h3>
+              <ul>
+                <li>فحص النظر (بحجز مسبق)</li>
+                <li>عدسات Unifocal و Progressif</li>
+                <li>خيارات: Anti-reflet، Blue cut، Photochromique…</li>
+                <li>إصلاح، تعديل وصيانة</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section">
+      <div class="wrap">
+        <div class="card">
+          <h3 data-lang="fr">Services</h3>
+          <h3 data-lang="ar">الخدمات</h3>
+
+          <div class="cols">
+            <div data-lang="fr">
+              <ul>
+                <li>Examen de la vue avec équipements modernes</li>
+                <li>Lunettes de vue & solaires</li>
+                <li>Lentilles de contact</li>
+                <li>Ajustage, réparation et entretien</li>
+              </ul>
+            </div>
+            <div data-lang="ar">
+              <ul>
+                <li>فحص النظر بأجهزة حديثة</li>
+                <li>نظارات طبية و شمسية</li>
+                <li>عدسات لاصقة</li>
+                <li>تعديل، إصلاح وصيانة</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="produits" class="section">
+      <div class="wrap">
+        <div class="card">
+          <h3 data-lang="fr">Produits</h3>
+          <h3 data-lang="ar">المنتجات</h3>
+
+          <div class="cols">
+            <div data-lang="fr">
+              <ul>
+                <li>Montures: classiques & tendance</li>
+                <li>Verres: anti-reflet, blue cut, photochromiques…</li>
+                <li>Lunettes solaires</li>
+                <li>Lentilles & produits d’entretien</li>
+              </ul>
+              <p class="hint">Ajoutez ici vos photos/brands quand vous êtes prêt.</p>
+            </div>
+
+            <div data-lang="ar">
+              <ul>
+                <li>إطارات: كلاسيك و عصري</li>
+                <li>عدسات: Anti-reflet، Blue cut، Photochromique…</li>
+                <li>نظارات شمسية</li>
+                <li>عدسات لاصقة ومواد العناية</li>
+              </ul>
+              <p class="hint">نقدر نزيدو صور الماركات والمنتجات من بعد.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="promo" class="section">
+      <div class="wrap">
+        <div class="card">
+          <h3 data-lang="fr">Promo</h3>
+          <h3 data-lang="ar">العروض</h3>
+
+          <div class="cols">
+            <div data-lang="fr">
+              <ul>
+                <li>Promotions du mois (à mettre à jour)</li>
+                <li>Packs monture + verres</li>
+                <li>Remises étudiants / familles (optionnel)</li>
+              </ul>
+            </div>
+
+            <div data-lang="ar">
+              <ul>
+                <li>عروض الشهر (كتتبدّل)</li>
+                <li>باك: إطار + عدسات</li>
+                <li>تخفيضات الطلبة / العائلات (اختياري)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="rdv" class="section">
+      <div class="wrap">
+        <div class="card">
+          <h3 data-lang="fr">Rendez-vous (demande d’appel)</h3>
+          <h3 data-lang="ar">حجز موعد (طلب اتصال)</h3>
+
+          <form id="rdvForm">
+            <div class="formgrid">
+              <div>
+                <label data-lang="fr" for="name">Nom & Prénom</label>
+                <label data-lang="ar" for="name">الإسم الكامل</label>
+                <input id="name" name="name" required placeholder="..." />
+              </div>
+              <div>
+                <label data-lang="fr" for="phone">Téléphone / WhatsApp</label>
+                <label data-lang="ar" for="phone">الهاتف / واتساب</label>
+                <input id="phone" name="phone" required placeholder="06..." />
+              </div>
+              <div>
+                <label data-lang="fr" for="day">Jour souhaité</label>
+                <label data-lang="ar" for="day">النهار اللي بغيتي</label>
+                <input id="day" name="day" placeholder="Ex: Lundi / 20-01-2026" />
+              </div>
+              <div>
+                <label data-lang="fr" for="slot">Plage horaire</label>
+                <label data-lang="ar" for="slot">الوقت</label>
+                <select id="slot" name="slot">
+                  <option value="Matin" data-lang="fr">Matin (10h–13h)</option>
+                  <option value="Après-midi" data-lang="fr">Après-midi (15h–20h)</option>
+
+                  <option value="الصباح" data-lang="ar">الصباح (10–13)</option>
+                  <option value="العشية" data-lang="ar">العشية (15–20)</option>
+                </select>
+              </div>
+            </div>
+
+            <label data-lang="fr" for="msg">Message (optionnel)</label>
+            <label data-lang="ar" for="msg">رسالة (اختياري)</label>
+            <textarea id="msg" name="msg" placeholder=""></textarea>
+
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
+              <button class="btn primary" type="submit" data-lang="fr">Envoyer sur WhatsApp</button>
+              <button class="btn primary" type="submit" data-lang="ar">صيفط عبر واتساب</button>
+
+              <a class="btn" href="tel:+212662100656" data-lang="fr">Appeler maintenant</a>
+              <a class="btn" href="tel:+212662100656" data-lang="ar">اتصال دابا</a>
+            </div>
+
+            <div class="hint" data-lang="fr">
+              Le formulaire envoie votre demande directement via WhatsApp (pas besoin de serveur).
+            </div>
+            <div class="hint" data-lang="ar">
+              الفورم كيرسل الطلب مباشرة فـ واتساب (بلا سيرفر).
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="wrap">
+        <div class="card">
+          <h3 data-lang="fr">Contact</h3>
+          <h3 data-lang="ar">تواصل معنا</h3>
+
+          <div class="cols">
+            <div>
+              <div data-lang="fr" class="muted">Ville</div>
+              <div data-lang="fr"><strong>Berrechid</strong></div>
+
+              <div data-lang="ar" class="muted">المدينة</div>
+              <div data-lang="ar"><strong>برشيد</strong></div>
+
+              <div style="height:10px"></div>
+
+              <div data-lang="fr" class="muted">Adresse</div>
+              <div data-lang="fr"><strong>8 Rue Bilal, Hay Ezzahra, Berrechid</strong></div>
+
+              <div data-lang="ar" class="muted">العنوان</div>
+              <div data-lang="ar"><strong>8 زنقة بلال، حي الزهراء، برشيد</strong></div>
+
+              <div style="height:10px"></div>
+
+              <div data-lang="fr" class="muted">Horaires</div>
+              <div data-lang="fr"><strong>10h–13h / 15h–20h</strong></div>
+
+              <div data-lang="ar" class="muted">أوقات العمل</div>
+              <div data-lang="ar"><strong>10:00–13:00 / 15:00–20:00</strong></div>
+
+              <div style="height:10px"></div>
+
+              <div data-lang="fr" class="muted">WhatsApp</div>
+              <div><strong>+212 662 100 656</strong></div>
+
+              <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+                <a class="btn primary" id="ctaWhatsappContact" target="_blank" rel="noopener" href="#">
+                  WhatsApp ↗
+                </a>
+                <a class="btn" id="ctaMapsContact" target="_blank" rel="noopener" href="#">
+                  <span data-lang="fr">Ouvrir dans Google Maps</span>
+                  <span data-lang="ar">فتح فـ Google Maps</span>
+                  ↗
+                </a>
+              </div>
+            </div>
+
+            <div>
+              <div class="muted" data-lang="fr">Google Maps</div>
+              <div class="muted" data-lang="ar">خريطة Google</div>
+
+              <div style="height:10px"></div>
+
+              <!-- Embed without API key using query -->
+              <iframe
+                id="mapFrame"
+                title="Google Maps"
+                width="100%"
+                height="320"
+                style="border:0; border-radius:16px; overflow:hidden;"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                src="">
+              </iframe>
+
+              <div class="hint" data-lang="fr">
+                Si vous avez un lien Maps officiel (nouvelle fiche), on le remplace ici.
+              </div>
+              <div class="hint" data-lang="ar">
+                إلا كان عندك lien ديال fiche الجديدة فـ Maps، نبدلوه هنا.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <div class="wrap" style="padding:0;">
+            © <span id="year"></span> Le Verre Optique — Tous droits réservés | جميع الحقوق محفوظة
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="floatbar">
+    <a class="btn primary" id="floatWhatsapp" target="_blank" rel="noopener" href="#">WhatsApp ↗</a>
+    <a class="btn" href="tel:+212662100656" data-lang="fr">Appeler</a>
+    <a class="btn" href="tel:+212662100656" data-lang="ar">اتصال</a>
+  </div>
+
+  <script>
+    // ====== Config ======
+    const WHATSAPP_NUMBER = "212662100656"; // بدون +
+    const ADDRESS_TEXT = "Le Verre Optique, 8 Rue Bilal, Hay Ezzahra, Berrechid, Maroc";
+
+    // Maps link (query-based) — ما كيحتاجش API key
+    const MAPS_LINK = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(ADDRESS_TEXT);
+
+    // Embed map
+    const MAPS_EMBED = "https://www.google.com/maps?q=" + encodeURIComponent(ADDRESS_TEXT) + "&output=embed";
+
+    // ====== Language toggle ======
+    const btnFr = document.getElementById("btnFr");
+    const btnAr = document.getElementById("btnAr");
+
+    function setLang(lang){
+      // Show/hide
+      document.querySelectorAll("[data-lang]").forEach(el=>{
+        el.classList.toggle("show", el.getAttribute("data-lang") === lang);
+      });
+
+      // Direction
+      document.documentElement.lang = (lang === "ar") ? "ar" : "fr";
+      document.documentElement.dir  = (lang === "ar") ? "rtl" : "ltr";
+
+      // Active buttons
+      btnFr.classList.toggle("active", lang === "fr");
+      btnAr.classList.toggle("active", lang === "ar");
+
+      // Store
+      localStorage.setItem("lvo_lang", lang);
+    }
+
+    btnFr.addEventListener("click", ()=> setLang("fr"));
+    btnAr.addEventListener("click", ()=> setLang("ar"));
+
+    // ====== WhatsApp links ======
+    function waLink(message){
+      return "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
+    }
+
+    const ctaWhatsappTop = document.getElementById("ctaWhatsappTop");
+    const ctaWhatsappContact = document.getElementById("ctaWhatsappContact");
+    const floatWhatsapp = document.getElementById("floatWhatsapp");
+    const ctaMapsTop = document.getElementById("ctaMapsTop");
+    const ctaMapsContact = document.getElementById("ctaMapsContact");
+    const mapFrame = document.getElementById("mapFrame");
+
+    function setStaticLinks(){
+      const msgFR = "Bonjour, je souhaite des informations / un rendez-vous chez Le Verre Optique.";
+      const msgAR = "سلام، بغيت معلومات / موعد فـ Le Verre Optique.";
+
+      // default based on current lang
+      const lang = localStorage.getItem("lvo_lang") || "fr";
+      const msg = (lang === "ar") ? msgAR : msgFR;
+
+      const link = waLink(msg);
+      ctaWhatsappTop.href = link;
+      ctaWhatsappContact.href = link;
+      floatWhatsapp.href = link;
+
+      ctaMapsTop.href = MAPS_LINK;
+      ctaMapsContact.href = MAPS_LINK;
+
+      mapFrame.src = MAPS_EMBED;
+    }
+
+    // ====== RDV form -> WhatsApp message ======
+    const form = document.getElementById("rdvForm");
+    form.addEventListener("submit", (e)=>{
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const day = document.getElementById("day").value.trim();
+      const slot = document.getElementById("slot").value;
+      const msg = document.getElementById("msg").value.trim();
+
+      const lang = localStorage.getItem("lvo_lang") || "fr";
+
+      const textFR =
+`Demande de rendez-vous (rappel):
+- Nom: ${name}
+- Téléphone: ${phone}
+- Jour: ${day || "-"}
+- Horaire: ${slot}
+- Message: ${msg || "-"}
+
+Adresse: 8 Rue Bilal, Hay Ezzahra, Berrechid`;
+
+      const textAR =
+`طلب اتصال لحجز موعد:
+- الإسم: ${name}
+- الهاتف: ${phone}
+- النهار: ${day || "-"}
+- الوقت: ${slot}
+- رسالة: ${msg || "-"}
+
+العنوان: 8 زنقة بلال، حي الزهراء، برشيد`;
+
+      window.open(waLink(lang === "ar" ? textAR : textFR), "_blank", "noopener");
+    });
+
+    // Year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Init
+    const saved = localStorage.getItem("lvo_lang") || "fr";
+    setLang(saved);
+    setStaticLinks();
+  </script>
+</body>
+</html>
+First version of Le Verre Optique website
