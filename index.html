@@ -1,4 +1,80 @@
 index.html
+.gallery-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+  gap:16px;
+  margin-top:12px;
+}
+
+.gitem{
+  padding:0; border:0; background:transparent; cursor:pointer;
+}
+.gitem img{
+  width:100%;
+  height:260px;
+  object-fit:cover;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow: 0 8px 25px rgba(0,0,0,.18);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.gitem img:hover{
+  transform: scale(1.03);
+  box-shadow: 0 14px 38px rgba(0,0,0,.28);
+}
+
+/* Lightbox */
+.lightbox{
+  position:fixed; inset:0;
+  background: rgba(0,0,0,.7);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:1000;
+}
+.lightbox.show{display:flex;}
+.lightbox-inner{
+  position:relative; max-width:900px; width:100%;
+}
+.lightbox-inner img{
+  width:100%; object-fit:contain;
+  border-radius:14px;
+}
+.lb-close{
+  position:absolute; top:-12px; right:-12px;
+  background:#fff; border:none;
+  font-size:22px; padding:6px 10px;
+  border-radius:50%; cursor:pointer;
+}
+html[dir="rtl"] .lb-close{left:-12px; right:auto;}
+<section id="galerie" class="section">
+  <div class="wrap">
+    <div class="card">
+      <h3 data-lang="fr">Galerie</h3>
+      <h3 data-lang="ar">معرض الصور</h3>
+
+      <div class="gallery-grid">
+        <button class="gitem" type="button" data-full="images/facade.jpg">
+          <img src="images/facade.jpg" alt="Façade Le Verre Optique">
+        </button>
+        <button class="gitem" type="button" data-full="images/interieur-1.jpg">
+          <img src="images/interieur-1.jpg" alt="Intérieur 1">
+        </button>
+        <button class="gitem" type="button" data-full="images/interieur-2.jpg">
+          <img src="images/interieur-2.jpg" alt="Intérieur 2">
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox Overlay -->
+<div id="lightbox" class="lightbox" aria-hidden="true">
+  <div class="lightbox-inner">
+    <button id="lbClose" class="lb-close" type="button">✕</button>
+    <img id="lbImg" src="" alt="">
+  </div>
+</div>
 <section class="gallery">
   <h3>Galerie</h3>
   <div class="gallery-grid">
@@ -710,3 +786,25 @@ Adresse: 8 Rue Bilal, Hay Ezzahra, Berrechid`;
 </body>
 </html>
 First version of Le Verre Optique website
+const lightbox = document.getElementById("lightbox");
+const lbImg = document.getElementById("lbImg");
+const lbClose = document.getElementById("lbClose");
+
+document.querySelectorAll(".gitem").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const full = btn.getAttribute("data-full");
+    lbImg.src = full;
+    lightbox.classList.add("show");
+    lightbox.setAttribute("aria-hidden", "false");
+  });
+});
+
+function closeLb(){
+  lightbox.classList.remove("show");
+  lightbox.setAttribute("aria-hidden", "true");
+  lbImg.src = "";
+}
+
+lbClose.addEventListener("click", closeLb);
+lightbox.addEventListener("click", (e)=>{ if(e.target===lightbox) closeLb(); });
+document.addEventListener("keydown", (e)=>{ if(e.key==="Escape") closeLb(); });
